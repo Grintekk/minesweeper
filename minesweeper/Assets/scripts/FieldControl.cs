@@ -11,7 +11,9 @@ public class FieldControl : MonoBehaviour
     [SerializeField] public OpenCell [,] cellField;
     private int bombsCreating;
     
-    private int countOpenCells = 0 ;
+    [SerializeField] public GameObject buttonsVisible;
+    
+    public int countOpenCells = 0 ;
     [SerializeField]public Sprite [] spriteArray = new Sprite [10];
     
     
@@ -80,11 +82,11 @@ public class FieldControl : MonoBehaviour
         OpenCurrentCell(countBomb,cell);
         else
         countOpenCells++;*/
-        countOpenCells++;
-        cell.GetComponent<SpriteRenderer>().sprite = FieldControl.Instance.spriteArray[countBomb];
+        //countOpenCells++;
+        //cell.GetComponent<SpriteRenderer>().sprite = FieldControl.Instance.spriteArray[countBomb];
         return countBomb;
     }
-    void OpenCurrentCell(int countBomb,OpenCell cell)
+    public void OpenCurrentCell(int countBomb,OpenCell cell)
     {
         if(!cell.isOpen)
         {

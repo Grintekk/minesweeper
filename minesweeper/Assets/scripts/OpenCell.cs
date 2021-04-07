@@ -24,6 +24,7 @@ public class OpenCell : MonoBehaviour
         {
             //userClick = true;
             int bombsCount = FieldControl.Instance.bombsNear(this);
+            FieldControl.Instance.OpenCurrentCell(bombsCount,this);
             //this.GetComponent<SpriteRenderer>().sprite = FieldControl.Instance.spriteArray[bombsCount];
             if(bombsCount==0)
             {
@@ -39,10 +40,12 @@ public class OpenCell : MonoBehaviour
         
         if(FieldControl.Instance.AreYouWin())
         {
-            SizeOfField a = new SizeOfField();
-            a.buttonsShow.SetActive(true);
+            
+           FieldControl.Instance.buttonsVisible.SetActive(true);
+           FieldControl.Instance.countOpenCells = 0;
         }
     }
+    
     public void OpenEmpty(int i, int j)
     {
         
@@ -64,11 +67,13 @@ public class OpenCell : MonoBehaviour
                         
                         if(bombscounter == 0 && FieldControl.Instance.cellField[posI,posJ].isOpen == false)
                         {
-                            FieldControl.Instance.cellField[posI,posJ].isOpen = true;
+                            FieldControl.Instance.OpenCurrentCell(bombscounter,FieldControl.Instance.cellField[posI,posJ]);
                            // Debug.Log("рекурсия зашла в  i =" + posI + " || j =  " + posJ);
                             FieldControl.Instance.cellField[posI,posJ].OpenEmpty(posI,posJ);
                         }
-
+                        
+                        FieldControl.Instance.OpenCurrentCell(bombscounter,FieldControl.Instance.cellField[posI,posJ]);
+                        
                     }
                     
                 }
